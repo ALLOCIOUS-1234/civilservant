@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CommunityFix - Report Community Issues</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <div class="max-w-md mx-auto bg-white shadow-lg min-h-screen rounded-b-lg overflow-hidden">
+    <!-- Header -->
+    <div class="bg-white px-4 pt-6 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="bg-indigo-600 text-white p-2 rounded-full">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-lg">CommunityFix</h1>
+          <p class="text-xs text-gray-500">Making neighborhoods better</p>
+        </div>
+      </div>
+      <div>
+        <i class="fas fa-bell text-gray-400"></i>
+      </div>
+    </div>
+
+    <!-- Banner -->
+    <div class="mt-4">
+      <img src="https://images.unsplash.com/photo-1494526585095-c41746248156" class="w-full h-40 object-cover rounded-md mx-auto" />
+      <div class="text-center mt-4 px-4">
+        <h2 class="text-2xl font-bold">Report Community Issues</h2>
+        <p class="text-sm text-gray-600">Help improve your neighborhood by reporting local problems</p>
+      </div>
+    </div>
+
+    <!-- Form Section -->
+    <div class="px-6 py-6">
+      <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
+        Quick Report
+        <span class="text-indigo-600"><i class="fas fa-map-marker-alt"></i></span>
+      </h3>
+
+      <!-- Description -->
+      <div class="mb-4">
+        <textarea
+          placeholder="Describe the issue (e.g., pothole, broken streetlight)"
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        ></textarea>
+      </div>
+
+      <!-- Upload Photo -->
+      <div class="mb-4 text-center border-2 border-dashed border-indigo-300 py-6 px-4 rounded-lg bg-indigo-50">
+        <label for="photoUpload" class="cursor-pointer text-indigo-700 flex flex-col items-center">
+          <i class="fas fa-camera mb-2 text-2xl"></i>
+          <span class="text-sm font-medium">Tap to add photo</span>
+        </label>
+        <input type="file" id="photoUpload" class="hidden" accept="image/*" />
+      </div>
+
+      <!-- Location Button -->
+      <div class="mb-4">
+        <button onclick="getLocation()" class="w-full flex items-center justify-between bg-green-100 text-green-800 px-4 py-3 rounded-lg">
+          <span>
+            <strong>Location Detection</strong><br />
+            <small>We’ll detect your location to route this issue</small>
+          </span>
+          <i class="fas fa-map-pin"></i>
+        </button>
+        <p id="locationOutput" class="text-xs text-gray-500 mt-2"></p>
+      </div>
+
+      <!-- Submit -->
+      <button class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700">
+        Submit Issue
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function getLocation() {
+      const output = document.getElementById('locationOutput');
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((pos) => {
+          output.textContent = `📍 Latitude: ${pos.coords.latitude}, Longitude: ${pos.coords.longitude}`;
+        }, () => {
+          output.textContent = "Unable to retrieve location.";
+        });
+      } else {
+        output.textContent = "Geolocation is not supported.";
+      }
+    }
+  </script>
+
+</body>
+</html>
